@@ -152,6 +152,12 @@ func main() {
 
 ```
 ```shell
+$ go run main.go
+# Output: foo: bar
+
+$ env ENV=dev go run main.go
+# Output: foo: bar
+
 $ env ENV=prod go run main.go
 # Output: foo: barber
 ```
@@ -186,8 +192,14 @@ func main() {
 
 ```
 ```shell
+
+
 $ env ENV_PREFIX=MYAPP MYAPP_FOO=barber go run main.go
 # Output: foo: barber
+
+$ env ENV_PREFIX=OTHERAPP OTHERAPP_FOO=barber go run main.go
+# Output: foo: barber
+
 ```
 
 Once `ENV_PREFIX` is set, the built-in environment keys (`ENV` and `CONFIG`) will be prefixed as well.
@@ -236,22 +248,7 @@ func main() {
 	fmt.Printf("foo: %s\n", cfg.GetString("foo"))
     // Output: foo: bar
 }
-``` 
-
-### `Load()`
-Loads configuration from file and environment variables.
-
-#### Example
-```go  
-func main() {
-    
-    // Load configuration
-    cfg := config.Load()
-	
-	fmt.Printf("foo: %s\n", cfg.GetString("foo"))
-    // Output: foo: bar
-}
-``` 
+```
 
 ### `Reload()`
 Reloads configuration from file and environment variables.
